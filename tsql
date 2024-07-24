@@ -1,0 +1,17 @@
+SELECT TOP (1000)  
+      [login_name]
+      ,COALESCE(nullif([wait_info], ''), 'No wait') Wait_Info
+      ,[tran_log_writes]
+      ,[CPU]
+      ,[collection_time] ,  
+	  case when  CAST([sql_text] AS VARCHAR(MAX)) = '' THEN 'NotCaptured'
+        ELSE [sql_text] 
+    END AS SQLText 
+	   --ISNULL([sql_text], 'NotCaptured') AS text 
+	  --COALESCE(NULLIF(CAST([sql_text] AS VARCHAR(MAX)),  ''), 'NA')  SQLText
+	  --COALESCE([sql_text], '')  SQLtext,[query_plan]
+  FROM  [WhoIsActive]
+      --COALESCE(text, 'NotCaptured') AS text 
+	  -- ISNULL(CAST(text AS VARCHAR(MAX)), 'NotCaptured') AS text 
+ --COALESCE(NULLIF(CAST(hostname AS VARCHAR(MAX)), ''), 'SA') AS hostname,
+  --CASE WHEN CAST(text AS VARCHAR(MAX)) IS NULL THEN 'NotCaptured' ELSE text END AS SQLText 
